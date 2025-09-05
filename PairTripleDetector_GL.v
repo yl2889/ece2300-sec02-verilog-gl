@@ -19,10 +19,19 @@ module PairTripleDetector_GL
   // Implement pair/triple detector using explicit gate-level modeling
   //''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-  `ECE2300_UNUSED( in0 );
-  `ECE2300_UNUSED( in1 );
-  `ECE2300_UNUSED( in2 );
-  `ECE2300_UNDRIVEN( out );
+  // OR gate in0, in1 -> w
+  wire w;
+  or( w, in0, in1 );
+
+  // AND gate in2, w -> y
+  wire y;
+  and ( y, w, in2 );
+
+  // AND gate in0, in1 -> x
+  wire x;
+  and( x, in0, in1 );
+
+  or( out, x, y);
 
 endmodule
 
